@@ -1,0 +1,69 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class InventorySystem {
+    private ArrayList<String> inventory = new ArrayList<>();
+
+    public void addItem(String item) {
+        inventory.add(item);
+        System.out.println(item + " has been added to the inventory.");
+    }
+
+    public void removeItem(String item) {
+        if (inventory.contains(item)) {
+            inventory.remove(item);
+            System.out.println(item + " has been removed from the inventory.");
+        } else {
+            System.out.println(item + " is not in the inventory.");
+        }
+    }
+
+    public void viewInventory() {
+        System.out.println("Inventory:");
+        for (String item : inventory) {
+            System.out.println(item);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        InventorySystem inventorySystem = new InventorySystem();
+        Scanner scanner = new Scanner(System.in);
+        boolean running = true;
+
+        while (running) {
+            System.out.println("\nChoose an operation:");
+            System.out.println("1. Add item");
+            System.out.println("2. Remove item");
+            System.out.println("3. View inventory");
+            System.out.println("4. Exit");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter item to add: ");
+                    String addItem = scanner.nextLine();
+                    inventorySystem.addItem(addItem);
+                    break;
+                case 2:
+                    System.out.print("Enter item to remove: ");
+                    String removeItem = scanner.nextLine();
+                    inventorySystem.removeItem(removeItem);
+                    break;
+                case 3:
+                    inventorySystem.viewInventory();
+                    break;
+                case 4:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please choose again.");
+            }
+        }
+
+        scanner.close();
+    }
+}
